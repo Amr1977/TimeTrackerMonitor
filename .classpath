@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="src" path="/sikuli2"/>
+	<classpathentry kind="lib" path="/sikuli2/basicplayer3.0.jar"/>
+	<classpathentry kind="lib" path="/sikuli2/commons-logging-api.jar"/>
+	<classpathentry kind="lib" path="/sikuli2/jfxrt.jar"/>
+	<classpathentry kind="lib" path="/sikuli2/jl1.0.jar"/>
+	<classpathentry kind="lib" path="/sikuli2/jna-4.1.0.jar"/>
+	<classpathentry kind="lib" path="/sikuli2/jogg-0.0.7.jar"/>
+	<classpathentry kind="lib" path="/sikuli2/jorbis-0.0.15.jar"/>
+	<classpathentry kind="lib" path="/sikuli2/jspeex0.9.7.jar"/>
+	<classpathentry kind="lib" path="/sikuli2/mp3spi1.9.4.jar"/>
+	<classpathentry kind="lib" path="/sikuli2/platform-3.5.1.jar"/>
+	<classpathentry kind="lib" path="/sikuli2/sikuli-java.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://doc.sikuli.org/javadoc"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/sikuli2/tritonus_share.jar"/>
+	<classpathentry kind="lib" path="/sikuli2/vorbisspi1.0.2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
