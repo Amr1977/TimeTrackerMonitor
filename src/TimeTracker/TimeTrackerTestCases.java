@@ -107,6 +107,7 @@ public class TimeTrackerTestCases extends common.Sikuliz {
 			Logging.setLogFile(ExtractionDir+"\\Log\\"+Logging.getDateStamp()+".txt");
 			try {
 				Sikuliz.getCFGsettings(ExtractionDir+"\\config.txt");
+				Sikuliz.getCFG();
 			} catch (IOException e4) {
 				// TODO Auto-generated catch block
 				e4.printStackTrace();
@@ -151,6 +152,11 @@ public class TimeTrackerTestCases extends common.Sikuliz {
 								Thread.sleep(1000);
 							}
 						} else {
+							if (minutesOff>=10){
+								failSoundPlayer.open(new File(items.iGet("Sounds").sGet("Error1")));
+							} else{
+								failSoundPlayer.open(new File(items.iGet("Sounds").sGet("Error")));
+							}
 							setTrayIcon(Items.iGet("Monitor/TrayIcon/Off").sGet(),"Monitored continous OFF time: "+toHoursAndMinutes(minutesOff)+", Total Off in this session: "+toHoursAndMinutes(totalOff));
 							for (int i=0; i<3;i++){
 								Sikuliz.notify("Monitored OFF time: "+toHoursAndMinutes(minutesOff)+ ", Total On: "+toHoursAndMinutes(totalOn)+", Total Off: "+toHoursAndMinutes(totalOff),"Tracker is NOT counting time :(");
@@ -168,7 +174,7 @@ public class TimeTrackerTestCases extends common.Sikuliz {
 						Logging.log("monitored continous OFF time: "+toHoursAndMinutes(minutesOff++) + ", Total On: "+toHoursAndMinutes(totalOn)+", Total Off: "+toHoursAndMinutes(totalOff++) );
 						
 					}else {
-						Logging.log("Tracker is counting time.");
+						//Logging.log("Tracker is counting time.");
 						if (praying){
 							praying=false;
 						}
@@ -177,7 +183,7 @@ public class TimeTrackerTestCases extends common.Sikuliz {
 						minutesOff=0;
 						setTrayIcon(Items.iGet("Monitor/TrayIcon/On").sGet(),"Monitored ON time: "+toHoursAndMinutes(minutesOn)+ ", Total On: "+toHoursAndMinutes(totalOn)+", Total Off: "+toHoursAndMinutes(totalOff));
 						passSound();
-						Logging.log("Monitored continous ON time: "+toHoursAndMinutes(minutesOn++) + ", Total On: "+toHoursAndMinutes(totalOn++) +", Total Off: "+toHoursAndMinutes(totalOff));
+						Logging.log("Monitored continous ON  time: "+toHoursAndMinutes(minutesOn++) + ", Total On: "+toHoursAndMinutes(totalOn++) +", Total Off: "+toHoursAndMinutes(totalOff));
 						if ((minutesOn % getIntegerCFGValue("prayer_interval"))==0){
 							Logging.log("GOTO Pray :)");
 							for (int i=0; i<3;i++){
