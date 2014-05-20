@@ -152,8 +152,8 @@ public class TimeTrackerTestCases extends common.Sikuliz {
 								Thread.sleep(1000);
 							}
 						} else {
-							if (minutesOff>=10){
-								failSoundPlayer.open(new File(items.iGet("Sounds").sGet("Error1")));
+							if (minutesOff>=getIntegerCFGValue("Long-off")){
+								failSoundPlayer.open(new File(items.iGet("Sounds").sGet("police")));
 							} else{
 								failSoundPlayer.open(new File(items.iGet("Sounds").sGet("Error")));
 							}
