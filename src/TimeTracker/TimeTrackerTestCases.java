@@ -71,8 +71,6 @@ public class TimeTrackerTestCases extends common.Sikuliz {
 			System.out.println("TimeTracker is Logging time :)");
 		} else {
 			System.out.println("TimeTracker is NOT Logging time :(");
-			
-			
 		}
 		
 		sPop();
