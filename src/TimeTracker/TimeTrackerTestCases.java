@@ -53,26 +53,22 @@ public class TimeTrackerTestCases extends common.Sikuliz {
 		//TODO if time tracker is paused
 		//this needs precise detection, make a mechanism for pushing and popping settings
 		//TODO how to specify a region in relative to another region
-		Screen primaryScreen=new Screen(0);
-		Screen secondaryScreen=new Screen(1);
-		Region regionOnPrimaryScreen=Region.create(primaryScreen.w-300, primaryScreen.h-30, 300, 30); //rectangle containing tray icons
-		Region regionOnSecondaryScreen=Region.create(secondaryScreen.w-300, secondaryScreen.h-30, 300, 30);
-		//r.highlight(10);
-		if (
-				(anyExist(regionOnPrimaryScreen, Items.iGet("TimeTracker/TrayIcon/On").sGetAll()) != null)
-				||
-				(anyExist(regionOnSecondaryScreen, Items.iGet("TimeTracker/TrayIcon/On").sGetAll()) != null)
-				||
-				(anyExist(primaryScreen, Items.iGet("TimeTracker/TrayIcon/On").sGetAll()) != null)
-				||
-				(anyExist(secondaryScreen, Items.iGet("TimeTracker/TrayIcon/On").sGetAll()) != null)
-				){//address the expected place to find try
-			result=true;//TODO refine search region to last 30 pixels at the bottom 
+		int numOfScreens=Screen.getNumberScreens();
+		Screen[] screens=new  Screen[numOfScreens];
+		Region[] regions=new Region[numOfScreens];//TODO search in the border only (last 50 of the boundaries)
+		for(int i=0;i<numOfScreens;i++){
+			screens[i]=new Screen(i);
+			regions[i]=screens[i];//Region.create(screens[i].w-300, screens[i].h-30, 300, 30);
+			if (anyExist(regions[i], Items.iGet("TimeTracker/TrayIcon/On").sGetAll()) != null){
+				result=true; 
+				break;
+			}
+		}
+		if (result){//address the expected place to find try
 			System.out.println("TimeTracker is Logging time :)");
 		} else {
 			System.out.println("TimeTracker is NOT Logging time :(");
 		}
-		
 		sPop();
 		return result;
 	}
