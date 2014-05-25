@@ -31,6 +31,11 @@ import common.JWin;
 import common.Logging;
 import common.Sikuliz;
 
+/**
+ * 
+ * @author Amr Lotfy
+ *
+ */
 public class TimeTrackerTestCases extends common.Sikuliz {
 	public static String timeTrackerOnImage=null;
 	public static int totalOn=0;
@@ -133,6 +138,7 @@ public class TimeTrackerTestCases extends common.Sikuliz {
 			// TODO Auto-generated method stub
 			while(true){
 				try {
+					 items=new Items(ExtractionDir+"\\resources");
 					if(!isLoggingTime()){
 						
 						if (prayNotified || praying){
