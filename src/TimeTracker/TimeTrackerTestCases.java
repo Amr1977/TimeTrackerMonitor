@@ -60,10 +60,10 @@ public class TimeTrackerTestCases extends common.Sikuliz {
 		//TODO how to specify a region in relative to another region
 		int numOfScreens=Screen.getNumberScreens();
 		Screen[] screens=new  Screen[numOfScreens];
-		Region[] regions=new Region[numOfScreens];//TODO search in the border only (last 50 of the boundaries)
+		Region[] regions=new Region[numOfScreens];//TODO search in the upper and lower borders only (last 50 pixel)
 		for(int i=0;i<numOfScreens;i++){
 			screens[i]=new Screen(i);
-			regions[i]=screens[i];//Region.create(screens[i].w-300, screens[i].h-30, 300, 30);
+			regions[i]=screens[i];
 			if (anyExist(regions[i], Items.iGet("TimeTracker/TrayIcon/On").sGetAll()) != null){
 				result=true; 
 				break;
@@ -144,7 +144,7 @@ public class TimeTrackerTestCases extends common.Sikuliz {
 						if (prayNotified || praying){
 							praying=true;
 							prayNotified=false;
-							Logging.log("Tracker is NOT counting time.");
+							//Logging.log("Tracker is NOT counting time.");
 							setTrayIcon(Items.iGet("Monitor/TrayIcon/Off").sGet(),"Monitored OFF time: "+toHoursAndMinutes(minutesOff)+ ", Total On: "+toHoursAndMinutes(totalOn)+", Total Off: "+toHoursAndMinutes(totalOff));
 							for (int i=0; i<3;i++){
 								Sikuliz.notify("Monitored OFF time: "+toHoursAndMinutes(minutesOff)+ ", Total On: "+toHoursAndMinutes(totalOn)+", Total Off: "+toHoursAndMinutes(totalOff),"Tracker is NOT counting time");
@@ -152,10 +152,14 @@ public class TimeTrackerTestCases extends common.Sikuliz {
 								Thread.sleep(1000);
 							}
 						} else {
+							Logging.log("minutesOff="+minutesOff+",getIntegerCFGValue('Long-off')="+getIntegerCFGValue("Long-off"));
 							if (minutesOff>=getIntegerCFGValue("Long-off")){
 								failSoundPlayer.open(new File(items.iGet("Sounds").sGet("police")));
+								Logging.log("Entered a long off state");
 							} else{
+								
 								failSoundPlayer.open(new File(items.iGet("Sounds").sGet("Error")));
+								Logging.log("Entered a short off state");
 							}
 							setTrayIcon(Items.iGet("Monitor/TrayIcon/Off").sGet(),"Monitored continous OFF time: "+toHoursAndMinutes(minutesOff)+", Total Off in this session: "+toHoursAndMinutes(totalOff));
 							for (int i=0; i<3;i++){
@@ -171,7 +175,7 @@ public class TimeTrackerTestCases extends common.Sikuliz {
 						}
 						
 						
-						Logging.log("monitored continous OFF time: "+toHoursAndMinutes(minutesOff++) + ", Total On: "+toHoursAndMinutes(totalOn)+", Total Off: "+toHoursAndMinutes(totalOff++) );
+						Logging.log("Monitored OFF time: "+toHoursAndMinutes(minutesOff++) + ", Total On: "+toHoursAndMinutes(totalOn)+", Total Off: "+toHoursAndMinutes(totalOff++) );
 						
 					}else {
 						//Logging.log("Tracker is counting time.");
@@ -183,7 +187,7 @@ public class TimeTrackerTestCases extends common.Sikuliz {
 						minutesOff=0;
 						setTrayIcon(Items.iGet("Monitor/TrayIcon/On").sGet(),"Monitored ON time: "+toHoursAndMinutes(minutesOn)+ ", Total On: "+toHoursAndMinutes(totalOn)+", Total Off: "+toHoursAndMinutes(totalOff));
 						passSound();
-						Logging.log("Monitored continous ON  time: "+toHoursAndMinutes(minutesOn++) + ", Total On: "+toHoursAndMinutes(totalOn++) +", Total Off: "+toHoursAndMinutes(totalOff));
+						Logging.log("Monitored ON  time: "+toHoursAndMinutes(minutesOn++) + ", Total On: "+toHoursAndMinutes(totalOn++) +", Total Off: "+toHoursAndMinutes(totalOff));
 						if ((minutesOn % getIntegerCFGValue("prayer_interval"))==0){
 							Logging.log("GOTO Pray :)");
 							for (int i=0; i<3;i++){
