@@ -40,7 +40,7 @@ public class TimeTrackerTestCases extends common.Sikuliz {
 	public static String timeTrackerOnImage=null;
 	public static int totalOn=0;
 	public static int totalOff=0;
-
+	Region lastFound=null;
 	TimeTrackerTestCases() throws IOException, BasicPlayerException,AWTException {
 		//timeTrackerOnImage=getFile(path+"TimeTrackerOn1.png");
 		appTitle = "TimeTracker2";
@@ -61,18 +61,33 @@ public class TimeTrackerTestCases extends common.Sikuliz {
 		int numOfScreens=Screen.getNumberScreens();
 		Screen[] screens=new  Screen[numOfScreens];
 		Region[] regions=new Region[numOfScreens];//TODO search in the upper and lower borders only (last 50 pixel)
-		for(int i=0;i<numOfScreens;i++){
-			screens[i]=new Screen(i);
-			regions[i]=screens[i];
-			if (anyExist(regions[i], Items.iGet("TimeTracker/TrayIcon/On").sGetAll()) != null){
-				result=true; 
-				break;
+		if (lastFound!=null){
+			lastFound=anyExist(lastFound, Items.iGet("TimeTracker/TrayIcon/On").sGetAll());
+			result=(lastFound!=null);
+		}
+		if (!result){
+			for(int i=0;i<numOfScreens;i++){
+				screens[i]=new Screen(i);
+				regions[i]=Region.create(screens[i].w*2/3,screens[i].h-30,screens[i].w,30);
+				if ((lastFound=anyExist(regions[i], Items.iGet("TimeTracker/TrayIcon/On").sGetAll())) != null){
+					result=true; 
+					break;
+				}
+			}
+			if (!result){
+				for(int i=0;i<numOfScreens;i++){
+					screens[i]=new Screen(i);
+					if ((lastFound=anyExist(screens[i], Items.iGet("TimeTracker/TrayIcon/On").sGetAll())) != null){
+						result=true; 
+						break;
+					}
+				}
 			}
 		}
 		if (result){//address the expected place to find try
-			System.out.println("TimeTracker is Logging time :)");
+			Logging.log("TimeTracker is Logging time :)");
 		} else {
-			System.out.println("TimeTracker is NOT Logging time :(");
+			Logging.log("TimeTracker is NOT Logging time :(");
 		}
 		sPop();
 		return result;
