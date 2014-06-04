@@ -1,4 +1,4 @@
-package TimeTracker;
+package timeTrackerMonitor;
 
 import java.awt.AWTException;
 import java.awt.TrayIcon;
@@ -43,6 +43,7 @@ public class TimeTrackerMonitor extends common.Sikuliz implements Runnable{
 		sPush();
 		Settings.MinSimilarity=0.97;
 		boolean result=false;
+		setTrayIcon(Items.sGet("monitor/TrayIcon/progress"), "in progress ...");
 		int numOfScreens=Screen.getNumberScreens();
 		Screen[] screens=new  Screen[numOfScreens];
 		Region[] regions=new Region[numOfScreens];
@@ -71,8 +72,10 @@ public class TimeTrackerMonitor extends common.Sikuliz implements Runnable{
 		}
 		if (result){//address the expected place to find try
 			Logging.log("TimeTracker is Logging time :)");
+			setTrayIcon(Items.sGet("monitor/TrayIcon/on"), "On");
 		} else {
 			Logging.log("TimeTracker is NOT Logging time :(");
+			setTrayIcon(Items.sGet("monitor/TrayIcon/Off"), "Off");
 		}
 		sPop();
 		return result;
