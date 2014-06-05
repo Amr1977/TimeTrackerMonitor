@@ -73,7 +73,7 @@ public class AutoLock extends Sikuliz implements Runnable{
 		try {
 			items=new Items("c:\\autolock\\resources");
 			setTrayIcon(Items.sGet("monitor/trayicon/on"), "autoLock activated");
-			playMp3(Items.sGet("sounds/police"));
+			failSoundPlayer.play();
 			while (true){
 				items=new Items("c:\\autolock\\resources");
 				setTrayIcon(Items.sGet("monitor/trayicon/searching"), "autoLock activated");
